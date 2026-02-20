@@ -1,134 +1,274 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Para Minha Amada</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BG STORE | Design Futurista</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --azul-glow: #007bff;
+            --azul-neon: #00d4ff;
+            --preto-fundo: #050505;
+            --card-bg: rgba(10, 10, 15, 0.8);
+        }
 
-<!-- Fonte Medieval -->
-<link href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" rel="stylesheet">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+        }
 
-<style>
-body{
-    margin:0;
-    padding:0;
-    overflow:hidden;
-    background: linear-gradient(135deg,#2b0040,#4b0082,#1a001f);
-    font-family:'MedievalSharp', cursive;
-    color:#fff;
-    text-align:center;
-}
+        body {
+            background-color: var(--preto-fundo);
+            color: white;
+            font-family: 'Rajdhani', sans-serif;
+            overflow-x: hidden;
+            /* Recria o efeito de iluminação da imagem enviada */
+            background-image: 
+                radial-gradient(circle at 50% 20%, rgba(0, 123, 255, 0.15) 0%, transparent 50%),
+                linear-gradient(to bottom, #0a0a0c 0%, #000000 100%);
+        }
 
-/* Efeito rosas */
-.rose{
-    position:fixed;
-    top:-50px;
-    font-size:20px;
-    animation:fall linear infinite;
-}
+        /* Linha de luz horizontal característica do design */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 400px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--azul-glow), transparent);
+            box-shadow: 0 0 15px var(--azul-glow);
+            opacity: 0.6;
+        }
 
-@keyframes fall{
-    to{
-        transform:translateY(110vh) rotate(360deg);
-    }
-}
+        header {
+            text-align: center;
+            padding: 60px 20px 40px;
+            position: relative;
+            z-index: 2;
+        }
 
-/* Título */
-h1{
-    margin-top:60px;
-    font-size:45px;
-    text-shadow:0 0 15px #ff66cc;
-}
+        /* Moldura de Perfil idêntica à imagem */
+        .perfil-container {
+            position: relative;
+            width: 170px;
+            height: 170px;
+            margin: 0 auto 25px;
+            border-radius: 50%;
+            padding: 4px;
+            background: linear-gradient(135deg, var(--azul-neon), transparent, var(--azul-glow));
+            box-shadow: 0 0 40px rgba(0, 123, 255, 0.3);
+            animation: float 4s ease-in-out infinite;
+        }
 
-/* Carta */
-.carta-container{
-    margin-top:80px;
-}
+        .perfil-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--preto-fundo);
+        }
 
-.carta{
-    font-size:80px;
-    cursor:pointer;
-    transition:0.3s;
-}
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px var(--azul-glow);
+        }
 
-.carta:hover{
-    transform:scale(1.2);
-}
+        /* Botão Abrir Ticket central */
+        .btn-ticket-main {
+            background: rgba(0, 123, 255, 0.15);
+            border: 1px solid var(--azul-neon);
+            color: var(--azul-neon);
+            padding: 12px 35px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            transition: 0.4s;
+            display: inline-block;
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.2);
+        }
 
-/* Mensagem */
-.mensagem{
-    display:none;
-    max-width:800px;
-    margin:40px auto;
-    background:rgba(0,0,0,0.6);
-    padding:30px;
-    border-radius:20px;
-    box-shadow:0 0 25px #ff66cc;
-    overflow-y:auto;
-    max-height:60vh;
-}
+        .btn-ticket-main:hover {
+            background: var(--azul-neon);
+            color: black;
+            box-shadow: 0 0 30px var(--azul-neon);
+            transform: scale(1.05);
+        }
 
-.mensagem p{
-    line-height:1.6;
-    font-size:18px;
-}
-</style>
+        /* Área de Produtos com Scroll Horizontal */
+        .loja-container {
+            width: 100%;
+            padding-bottom: 80px;
+        }
+
+        .carrossel {
+            display: flex;
+            overflow-x: auto;
+            gap: 25px;
+            padding: 40px 10%;
+            scrollbar-width: none; /* Firefox */
+        }
+
+        .carrossel::-webkit-scrollbar {
+            display: none; /* Chrome/Safari */
+        }
+
+        .card {
+            min-width: 280px;
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 30px 20px;
+            text-align: center;
+            text-decoration: none;
+            color: white;
+            transition: 0.4s;
+            position: relative;
+            backdrop-filter: blur(5px);
+        }
+
+        .card:hover {
+            transform: translateY(-15px);
+            border-color: var(--azul-neon);
+            box-shadow: 0 15px 35px rgba(0, 123, 255, 0.2);
+            background: rgba(20, 20, 30, 0.9);
+        }
+
+        .carrinho-icon {
+            width: 70px;
+            height: 70px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 10px var(--azul-glow));
+        }
+
+        .card h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            color: #ccc;
+            margin-bottom: 10px;
+        }
+
+        .preco {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin: 10px 0;
+            color: white;
+            text-shadow: 0 0 10px rgba(255,255,255,0.2);
+        }
+
+        .prazo {
+            font-size: 0.8rem;
+            color: var(--azul-neon);
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+
+        .btn-buy {
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 8px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+
+        .card:hover .btn-buy {
+            background: white;
+            color: black;
+            border-color: white;
+        }
+
+        /* Animação Flutuante */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+
+        /* Aviso de Mensagem Ticket */
+        .msg-suporte {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.5);
+            letter-spacing: 1px;
+        }
+
+    </style>
 </head>
 <body>
 
-<h1>Para Minha Amada Cristielly 💜</h1>
+    <header>
+        <div class="perfil-container">
+            <img src="https://cdn.discordapp.com/attachments/1447252415450452010/1474439110902026502/779ac9f757bb46f1fb87c50bbaaee204.jpg?ex=6999d9ed&is=6998886d&hm=b40550d149b05c7808f4cab87824a7c85344822eea2613d83f585c4bb183ee60&" alt="BG Store" class="perfil-img">
+        </div>
+        <h1>BG STORE</h1>
+        <a href="https://discord.com/channels/1447252414452203634/1457745365993525383" class="btn-ticket-main">ABRIR TICKET</a>
+        <p class="msg-suporte">Pronto para pedir? Clique em um produto e inicie seu ticket.</p>
+    </header>
 
-<div class="carta-container">
-    <div class="carta" onclick="abrirCarta()">📜</div>
-</div>
+    <div class="loja-container">
+        <div class="carrossel">
+            
+            <a href="https://discord.com/channels/1447252414452203634/1457745365993525383" class="card">
+                <img src="https://cdn.discordapp.com/attachments/1447252415450452010/1474440734995124308/Picsart_26-02-20_13-20-51-584.png?ex=6999db71&is=699889f1&hm=c91d7ee26d662596948fc64f5c2dcf1d6552f407fefbb988fdddd8ff8895b1bc&" class="carrinho-icon">
+                <h3>EDIT FLASH</h3>
+                <div class="preco">R$ 20</div>
+                <p class="prazo">Entrega Imediata</p>
+                <div class="btn-buy">Abrir Ticket</div>
+            </a>
 
-<div class="mensagem" id="mensagem">
-<p><strong>Minha amada Cristielly,</strong></p>
+            <a href="https://discord.com/channels/1447252414452203634/1457745365993525383" class="card">
+                <img src="https://cdn.discordapp.com/attachments/1447252415450452010/1474440734995124308/Picsart_26-02-20_13-20-51-584.png?ex=6999db71&is=699889f1&hm=c91d7ee26d662596948fc64f5c2dcf1d6552f407fefbb988fdddd8ff8895b1bc&" class="carrinho-icon">
+                <h3>EDIT PRIORIDADE</h3>
+                <div class="preco">R$ 15</div>
+                <p class="prazo">Prazo 5 Horas</p>
+                <div class="btn-buy">Abrir Ticket</div>
+            </a>
 
-<p>Eu nem sei por onde começar, porque quando se trata de você, qualquer palavra parece pequena demais para descrever o tamanho do que eu sinto. Mas ainda assim, eu preciso tentar… porque guardar tudo isso só pra mim seria impossível.</p>
+            <a href="https://discord.com/channels/1447252414452203634/1457745365993525383" class="card">
+                <img src="https://cdn.discordapp.com/attachments/1447252415450452010/1474440734995124308/Picsart_26-02-20_13-20-51-584.png?ex=6999db71&is=699889f1&hm=c91d7ee26d662596948fc64f5c2dcf1d6552f407fefbb988fdddd8ff8895b1bc&" class="carrinho-icon">
+                <h3>EDIT AVANÇADA</h3>
+                <div class="preco">R$ 10</div>
+                <p class="prazo">Prazo 10 Horas</p>
+                <div class="btn-buy">Abrir Ticket</div>
+            </a>
 
-<p>Eu te amo. E não é um “eu te amo” qualquer. É um amor que cresce a cada dia, que se fortalece quando eu lembro do seu sorriso, que se acalma quando penso no seu jeito, e que se enche de orgulho só por saber que você existe.</p>
+            <a href="https://discord.com/channels/1447252414452203634/1457745365993525383" class="card">
+                <img src="https://cdn.discordapp.com/attachments/1447252415450452010/1474440734995124308/Picsart_26-02-20_13-20-51-584.png?ex=6999db71&is=699889f1&hm=c91d7ee26d662596948fc64f5c2dcf1d6552f407fefbb988fdddd8ff8895b1bc&" class="carrinho-icon">
+                <h3>EDIT PADRÃO</h3>
+                <div class="preco">R$ 5</div>
+                <p class="prazo">Prazo 15 Horas</p>
+                <div class="btn-buy">Abrir Ticket</div>
+            </a>
 
-<p>Seu cabelo cacheado é uma das coisas mais lindas que eu já vi. Cada cachinho parece ter sido desenhado com carinho, combinando perfeitamente com sua pele morena que brilha de um jeito único. Seus olhos castanho-escuros têm uma profundidade que me prende… quando eu olho pra eles, eu me perco, mas é o tipo de perda que eu nunca quero encontrar saída.</p>
+            <a href="https://discord.com/channels/1447252414452203634/1457745365993525383" class="card">
+                <img src="https://cdn.discordapp.com/attachments/1447252415450452010/1474440734995124308/Picsart_26-02-20_13-20-51-584.png?ex=6999db71&is=699889f1&hm=c91d7ee26d662596948fc64f5c2dcf1d6552f407fefbb988fdddd8ff8895b1bc&" class="carrinho-icon">
+                <h3>EDIT ECONÔMICA</h3>
+                <div class="preco">R$ 2</div>
+                <p class="prazo">Prazo 24 Horas</p>
+                <div class="btn-buy">Abrir Ticket</div>
+            </a>
 
-<p>Seu sorriso… ah, seu sorriso. Ele é capaz de iluminar qualquer dia ruim. É aquele tipo de sorriso que dá vontade de proteger, de cuidar, de fazer de tudo só pra ver ele aparecer de novo. E o seu jeitinho encantador me conquista todos os dias como se fosse a primeira vez.</p>
+            <a href="https://discord.com/channels/1447252414452203634/1457745365993525383" class="card">
+                <img src="https://cdn.discordapp.com/attachments/1447252415450452010/1474440734995124308/Picsart_26-02-20_13-20-51-584.png?ex=6999db71&is=699889f1&hm=c91d7ee26d662596948fc64f5c2dcf1d6552f407fefbb988fdddd8ff8895b1bc&" class="carrinho-icon">
+                <h3>EDIT FREE</h3>
+                <div class="preco">R$ 0</div>
+                <p class="prazo">Prazo 72 Horas</p>
+                <div class="btn-buy">Abrir Ticket</div>
+            </a>
 
-<p>E o seu abraço… o seu abraço é quente, é aconchegante, é aquele lugar onde eu sinto que tudo fica bem. Parece que o mundo desacelera e, por alguns segundos, nada mais importa além de estar ali com você. É no seu abraço que eu encontro paz.</p>
-
-<p>A sua voz é simplesmente perfeita. Cada vez que você fala, eu poderia ficar horas só escutando. Tem algo no seu tom, na sua maneira de se expressar, que me acalma e ao mesmo tempo acelera meu coração. É incrível como algo tão simples consegue mexer tanto comigo.</p>
-
-<p>Você é um pouco baixinha, mas o que você tem de altura física, você tem em dobro em grandeza de coração. Você é gigante por dentro. Gigante em carinho, em força, em doçura. E talvez você nem perceba o quanto é incrível, mas eu percebo. Eu vejo em você uma garota forte, especial, rara.</p>
-
-<p>E sabe o mais lindo de tudo? Cada dia que passa eu me apaixono mais por você. Não é algo que diminui ou fica igual… cresce. Cresce quando você sorri, quando você fala, quando você me olha, quando simplesmente existe. É como se meu coração escolhesse você de novo todos os dias.</p>
-
-<p>Se um dia você duvidar do seu valor, lembra que existe alguém aqui que te admira profundamente. Que te ama com verdade. Que vê em você não só uma garota linda, mas alguém que faz o coração bater diferente, que traz paz, que desperta sentimentos sinceros.</p>
-
-<p>Cristielly, você é especial demais pra esse mundo. E eu sou grato por poder sentir tudo isso por você. Meu amor por você não é passageiro, não é pequeno, não é fraco. Ele é firme, é verdadeiro e é todo seu.</p>
-
-<p><strong>Com todo o meu amor,<br>Darlan 💖</strong></p>
-</div>
-
-<script>
-function abrirCarta(){
-    const mensagem = document.getElementById("mensagem");
-    if(mensagem.style.display === "block"){
-        mensagem.style.display = "none";
-    }else{
-        mensagem.style.display = "block";
-    }
-}
-
-/* Criar rosas caindo */
-for(let i=0;i<25;i++){
-    let rosa = document.createElement("div");
-    rosa.classList.add("rose");
-    rosa.innerHTML = "🌹";
-    rosa.style.left = Math.random()*100 + "vw";
-    rosa.style.animationDuration = (5 + Math.random()*5) + "s";
-    rosa.style.fontSize = (15 + Math.random()*20) + "px";
-    document.body.appendChild(rosa);
-}
-</script>
+        </div>
+    </div>
 
 </body>
 </html>
